@@ -17,7 +17,6 @@ import {
   Router,
   Switch,
   Modal,
-  Actions,
   ActionConst,
 } from 'react-native-router-flux';
 import Error from './components/Error';
@@ -25,8 +24,10 @@ import Home from './components/Home';
 import TabView from './components/TabView';
 import TabIcon from './components/TabIcon';
 import EchoView from './components/EchoView';
+import Contact from './components/Contact'
 import NavigationDrawer from './components/NavigationDrawer';
 import Button from 'react-native-button';
+import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent', justifyContent: 'center',
@@ -92,14 +93,13 @@ class Xgen extends Component {
   render() {
     return (
       <Router createReducer={reducerCreate} getSceneStyle={getSceneStyle}>
-        <Scene key="modal" component={Modal} >
+        <Scene key="modal" component={Modal}>
           <Scene key="root" hideNavBar hideTabBar>
             <Scene key="echo" clone component={EchoView} getTitle={(navState) => navState.key} />
             <Scene
               key="switcher"
               component={Switch}
-              selector={() => { return 'text1'; }}
-            >
+              selector={() => { return 'text1'; }}>
               <Scene
                 key="text1"
                 text="text1"
@@ -140,6 +140,10 @@ class Xgen extends Component {
                 duration={1}
               />
             </Scene>
+
+
+
+
             <Scene key="tabbar" component={NavigationDrawer}>
               <Scene
                 key="main"
@@ -158,10 +162,9 @@ class Xgen extends Component {
                     key="tab1_1"
                     component={TabView}
                     title="Contactos"
-                    onRight={() => alert('Right button')}
-                    rightTitle="Right"
+                    onRight={() =>  Actions.tab3() }
+                    rightTitle="Add"
                   />
-
                 </Scene>
                 <Scene
                   key="tab2"
@@ -178,9 +181,70 @@ class Xgen extends Component {
                     rightTitle="Right"
                   />
                 </Scene>
-
+                <Scene
+                  key="tab3"
+                  title="Anadir Contacto"
+                  navigationBarStyle={{ backgroundColor: 'red' }}
+                  titleStyle={{ color: 'white' }}
+                >
+                <Scene
+                  key="tab3_1"
+                  component={Contact}
+                  title="Anadir Contacto "
+                />
+                </Scene>
               </Scene>
             </Scene>
+
+
+
+            <Scene key="addContact" component={Contact}>
+              <Scene
+                key="main2"
+                tabs
+                tabBarStyle={styles.tabBarStyle}
+                tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}
+              >
+                <Scene
+                  key="tab12"
+                  title="Contactos"
+                  icon={TabIcon}
+                  navigationBarStyle={{ backgroundColor: 'red' }}
+                  titleStyle={{ color: 'white' }}
+                >
+                  <Scene
+                    key="tab1_12"
+                    component={TabView}
+                    title="Contactos"
+                    onRight= {Actions.contact}
+                    rightTitle="Add"
+                  />
+                  <Scene
+                    key="contact"
+                    component={Contact}
+                  />
+                </Scene>
+                <Scene
+                  key="tab22"
+                  title="Grupos"
+                  icon={TabIcon}
+                  navigationBarStyle={{ backgroundColor: 'red' }}
+                  titleStyle={{ color: 'white' }}
+                >
+                  <Scene
+                    key="tab2_12"
+                    component={TabView}
+                    title="Grupos"
+                    onRight={() => alert('Right button')}
+                    rightTitle="Right"
+                  />
+                </Scene>
+              </Scene>
+            </Scene>
+
+
+
+
           </Scene>
           <Scene key="error" component={Error} />
         </Scene>
