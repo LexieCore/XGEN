@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    borderWidth: 2,
-    borderColor: 'red',
+    backgroundColor: '#FfFfFF',
+    borderWidth: 1,
+    borderColor: 'white',
   },
 });
 

@@ -50,7 +50,7 @@ class ListViewDemo extends React.Component {
           dataBlob[rowId] = users[i];
         }
       }
-    }
+    } 
     return { dataBlob, sectionIds, rowIds };
   }
 

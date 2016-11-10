@@ -25,6 +25,7 @@ import TabView from './components/TabView';
 import TabIcon from './components/TabIcon';
 import EchoView from './components/EchoView';
 import Contact from './components/Contact'
+import Contact2 from './components/Contact2'
 import NavigationDrawer from './components/NavigationDrawer';
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 const reducerCreate = params => {
-  const defaultReducer = new Reducer(params);
+  const defaultReducer = new defaultReducer(params);
   return (state, action) => {
     console.log('ACTION:', action);
     return defaultReducer(state, action);
@@ -92,7 +93,7 @@ const SwitcherPage = (props) => (
 class Xgen extends Component {
   render() {
     return (
-      <Router createReducer={reducerCreate} getSceneStyle={getSceneStyle}>
+      <Router creatReducer={reducerCreate} getSceneStyle={getSceneStyle}>
         <Scene key="modal" component={Modal}>
           <Scene key="root" hideNavBar hideTabBar>
             <Scene key="echo" clone component={EchoView} getTitle={(navState) => navState.key} />
@@ -120,7 +121,7 @@ class Xgen extends Component {
             <Scene key="register" component={Register} title="Register" />
             <Scene key="register2" component={Register} title="Register2" duration={1} />
             <Scene key="home" component={Home} title="Replace" type={ActionConst.REPLACE} />
-            <Scene key="launch" component={Launch} title="Launch" initial />
+            <Scene key="launch" component={Launch} title="Launch" />
             <Scene key="login" direction="vertical" >
               <Scene key="loginModal" direction="vertical" component={Login} title="Login" />
               <Scene
@@ -144,7 +145,7 @@ class Xgen extends Component {
 
 
 
-            <Scene key="tabbar" component={NavigationDrawer}>
+            <Scene key="tabbar" component={NavigationDrawer} initial>
               <Scene
                 key="main"
                 tabs
@@ -155,7 +156,7 @@ class Xgen extends Component {
                   key="tab1"
                   title="Contactos"
                   icon={TabIcon}
-                  navigationBarStyle={{ backgroundColor: 'red' }}
+                  navigationBarStyle={{ backgroundColor: '#55dc5b' }}
                   titleStyle={{ color: 'white' }}
                 >
                   <Scene
@@ -170,7 +171,7 @@ class Xgen extends Component {
                   key="tab2"
                   title="Grupos"
                   icon={TabIcon}
-                  navigationBarStyle={{ backgroundColor: 'red' }}
+                  navigationBarStyle={{ backgroundColor: '#55dc5b' }}
                   titleStyle={{ color: 'white' }}
                 >
                   <Scene
@@ -184,67 +185,17 @@ class Xgen extends Component {
                 <Scene
                   key="tab3"
                   title="Anadir Contacto"
-                  navigationBarStyle={{ backgroundColor: 'red' }}
+                  navigationBarStyle={{ backgroundColor: '#55dc5b' }}
                   titleStyle={{ color: 'white' }}
                 >
                 <Scene
                   key="tab3_1"
-                  component={Contact}
+                  component={Contact2}
                   title="Anadir Contacto "
                 />
                 </Scene>
               </Scene>
             </Scene>
-
-
-
-            <Scene key="addContact" component={Contact}>
-              <Scene
-                key="main2"
-                tabs
-                tabBarStyle={styles.tabBarStyle}
-                tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}
-              >
-                <Scene
-                  key="tab12"
-                  title="Contactos"
-                  icon={TabIcon}
-                  navigationBarStyle={{ backgroundColor: 'red' }}
-                  titleStyle={{ color: 'white' }}
-                >
-                  <Scene
-                    key="tab1_12"
-                    component={TabView}
-                    title="Contactos"
-                    onRight= {Actions.contact}
-                    rightTitle="Add"
-                  />
-                  <Scene
-                    key="contact"
-                    component={Contact}
-                  />
-                </Scene>
-                <Scene
-                  key="tab22"
-                  title="Grupos"
-                  icon={TabIcon}
-                  navigationBarStyle={{ backgroundColor: 'red' }}
-                  titleStyle={{ color: 'white' }}
-                >
-                  <Scene
-                    key="tab2_12"
-                    component={TabView}
-                    title="Grupos"
-                    onRight={() => alert('Right button')}
-                    rightTitle="Right"
-                  />
-                </Scene>
-              </Scene>
-            </Scene>
-
-
-
-
           </Scene>
           <Scene key="error" component={Error} />
         </Scene>
