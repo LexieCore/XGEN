@@ -30,6 +30,7 @@ import NavigationDrawer from './components/NavigationDrawer';
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 
+
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent', justifyContent: 'center',
     alignItems: 'center',
@@ -192,6 +193,18 @@ class Xgen extends Component {
                   key="tab3_1"
                   component={Contact2}
                   title="Anadir Contacto "
+                />
+                </Scene>
+                <Scene
+                  key="tab4"
+                  title="Contacto"
+                  navigationBarStyle={{ backgroundColor: '#55dc5b' }}
+                  titleStyle={{ color: 'white' }}
+                >
+                <Scene
+                  key="tab4_1"
+                  component={Contact}
+                  title="Contacto"
                 />
                 </Scene>
               </Scene>

@@ -30,38 +30,19 @@ AsyncStorage.setItem('@MySuperStore:key', JSON.stringify(UID123_object), () => {
 });
 
 
+const Contact = (props) => (
 
-
-
-
-
-const Contact = () => (
   <View >
 
-        <Text style={{marginTop:50,marginLeft:50,width: 200,height: 50,color:'black'}}>Nombre</Text>
-        <TextInput
-            maxLength={15}
-            multiline = {true}
-            style={{marginLeft:50,width: 200,height: 50,color:'black',marginBottom:10,marginTop:0}}
-            />
-        <Text style={{marginLeft:50,width: 200,height: 50,color:'black'}}>Telefono</Text>
-        <TextInput
-            maxLength={15}
-            multiline = {true}
-            style={{marginLeft:50,width: 200,height: 50,color:'black',marginBottom:10}}
-            />
-        <Text style={{marginLeft:50,width: 200,height: 50,color:'black'}}>Correo Electronico</Text>
-        <TextInput
-            maxLength={15}
-            multiline = {true}
-            style={{marginLeft:50,width: 200,height: 50,color:'black',marginBottom:50}}
-            />
-            <FormButton
-            isDisabled={false}
-            onPress={() => alert('Right button')}
-            buttonText={'Anadir'}
-            color={'#55dc5b'}
-          />
+        <Text style={{marginTop:50,marginLeft:50,width: 200,height: 50,color:'black',fontWeight:'bold'}}>Nombre</Text>
+        <Text style={{marginTop:5,marginLeft:50,width: 200,height: 50,color:'black'}}>{`${props.name.first} ${props.name.last}`}</Text>
+
+        <Text style={{marginLeft:50,width: 200,height: 50,color:'black',fontWeight:'bold'}}>Telefono</Text>
+        <Text style={{marginTop:5,marginLeft:50,width: 200,height: 50,color:'black'}}>{`${props.phone}`}</Text>
+
+        <Text style={{marginLeft:50,width: 200,height: 50,color:'black',fontWeight:'bold'}}>Correo Electronico</Text>
+        <Text style={{marginTop:5,marginLeft:50,width: 200,height: 50,color:'black'}}>{`${props.email}`}</Text>
+
   </View>
 );
 

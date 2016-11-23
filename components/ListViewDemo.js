@@ -1,8 +1,16 @@
 import React from 'react';
-import { View, ListView, StyleSheet, Text } from 'react-native';
+import { View, ListView, StyleSheet, Text, AsyncStorage } from 'react-native';
+
+
+
 
 import Row from './Row'
 import demoData from './data'
+import Contact from './Contact'
+
+
+
+global.contactos = [];
 
 const styles = StyleSheet.create({
   container: {
@@ -10,6 +18,8 @@ const styles = StyleSheet.create({
     width: 360,
   },
 });
+
+
 
 class ListViewDemo extends React.Component {
   constructor(props) {
@@ -25,14 +35,43 @@ class ListViewDemo extends React.Component {
       getSectionData,
       getRowData
     });
+
     const { dataBlob, sectionIds, rowIds } = this.formatData(demoData);
 
     this.state = {
-      dataSource: ds.cloneWithRowsAndSections(dataBlob, sectionIds, rowIds)
+      dataSource: ds.cloneWithRowsAndSections(dataBlob, sectionIds, rowIds),
+      data:{},
     }
+
+  }
+
+  componentDidMount(){
+
+    const getSectionData = (dataBlob, sectionId) => dataBlob[sectionId];
+    const getRowData = (dataBlob, sectionId, rowId) => dataBlob[`${rowId}`];
+
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+      sectionHeaderHasChanged : (s1, s2) => s1 !== s2,
+      getSectionData,
+      getRowData
+    });
+
+    AsyncStorage.getItem('cs').then((value) => {
+      contactos = "["+value+"]";
+      contactos = JSON.parse(contactos);
+
+      const { dataBlob, sectionIds, rowIds } = this.formatData(contactos);
+
+      this.state = {
+        dataSource: ds.cloneWithRowsAndSections(dataBlob, sectionIds, rowIds),
+      }
+
+    });
   }
 
   formatData(data) {
+
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     const dataBlob = {};
     const sectionIds = [];
@@ -50,7 +89,7 @@ class ListViewDemo extends React.Component {
           dataBlob[rowId] = users[i];
         }
       }
-    } 
+    }
     return { dataBlob, sectionIds, rowIds };
   }
 

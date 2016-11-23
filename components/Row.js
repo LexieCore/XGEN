@@ -1,6 +1,10 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import Button from 'react-native-button';
+import Contact from './Contact';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -20,13 +24,34 @@ const styles = StyleSheet.create({
   },
 });
 
-const Row = (props) => (
-  <View style={styles.container}>
-    <Image source={{ uri: props.picture.large}} style={styles.photo} />
-    <Text style={styles.text}>
-      {`${props.name.first} ${props.name.last}`}
-    </Text>
-  </View>
-);
+
+
+
+
+class Row extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+  };
+
+  render() {
+    return (
+      <View  style={styles.container} >
+
+        <Button onPress={() =>  Actions.tab4(this.props) }>
+        <Image source={{ uri: this.props.picture.large}} style={styles.photo} />
+        <Text style={styles.text}>
+          {`${this.props.name.first} ${this.props.name.last}`}
+        </Text>
+        </Button>
+
+      </View>
+    );
+  }
+
+};
+
+
 
 export default Row;
